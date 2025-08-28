@@ -1,8 +1,8 @@
 <!-- App.vue -->
 <script setup>
-import { useRoute } from "vue-router";
-import DefaultLayout from "@/components/layouts/DefaultLayout.vue";
-import ChatBot from "./components/chatbot/ChatBot.vue";
+import { useRoute } from 'vue-router';
+import DefaultLayout from '@/shared/components/layouts/DefaultLayout.vue';
+import ChatBot from './modules/chatbot/ChatBot.vue';
 
 // 현재 라우트를 가져오기
 const route = useRoute();
@@ -10,7 +10,13 @@ const route = useRoute();
 
 <template>
   <!-- 로그인 페이지가 아닐 때만 기본 레이아웃 적용 -->
-  <DefaultLayout v-if="route.path !== '/login' && route.path !== '/signup' && route.path !== '/reset-password'">
+  <DefaultLayout
+    v-if="
+      route.path !== '/login' &&
+      route.path !== '/signup' &&
+      route.path !== '/reset-password'
+    "
+  >
     <ChatBot />
     <!--
       라우터 뷰 컴포넌트

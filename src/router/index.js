@@ -1,44 +1,45 @@
 // router/index.js 또는 router.js
-import KakaoCallbackPage from '@/pages/auth/KakaoCallbackPage.vue';
+import KakaoCallbackPage from '@/modules/user/auth/pages/KakaoCallbackPage.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import { useAuthStore } from '@/stores/auth.js';
+import { useAuthStore } from '@/shared/stores/auth.js';
 
 /* ── 페이지 컴포넌트 ─────────────────────── */
-import LoginPage from '@/pages/auth/LoginPage.vue';
-import ResetPasswordPage from '@/pages/auth/ResetPasswordPage.vue';
-import SignupPage from '@/pages/auth/SignupPage.vue';
-import RecommendDeposit from '@/pages/deposit/RecommendDeposit.vue';
-import HomePage from '@/pages/HomePage.vue';
-import MyInfoPage from '@/pages/user/MyInfoPage.vue';
-import MyPage from '@/pages/user/MyPage.vue';
-import UpdatePasswordPage from '@/pages/user/UpdatePasswordPage.vue';
-import UpdateUserInfoPage from '@/pages/user/UpdateUserInfoPage.vue';
-import FavoritePage from '@/pages/user/MyFavoritePage.vue';
-import FortunePage from '@/pages/quiz/FortunePage.vue';
-import PersonaCardAllList from '@/pages/persona/PersonaCardAllList.vue';
-import PersonaDepositAllList from '@/pages/persona/PersonaDepositAllListPage.vue';
-import PersonaSavingAllList from '@/pages/persona/PersonaSavingAllListPage.vue';
-import PersonaSurveyPage from '@/pages/persona/PersonaSurveyPage.vue';
-import PersonaSurveyStart from '@/pages/persona/PersonaSurveyStartPage.vue';
+import LoginPage from '@/modules/user/auth/pages/LoginPage.vue';
+import ResetPasswordPage from '@/modules/user/auth/pages/ResetPasswordPage.vue';
+import SignupPage from '@/modules/user/auth/pages/SignupPage.vue';
+import RecommendDeposit from '@/modules/deposit/mydata/pages/RecommendDeposit.vue';
+import HomePage from '@/modules/home/pages/HomePage.vue';
+import MyInfoPage from '@/modules/user/profile/pages/MyInfoPage.vue';
+import MyPage from '@/modules/user/profile/pages/MyPage.vue';
+import UpdatePasswordPage from '@/modules/user/profile/pages/UpdatePasswordPage.vue';
+import UpdateUserInfoPage from '@/modules/user/profile/pages/UpdateUserInfoPage.vue';
+import FavoritePage from '@/modules/user/profile/pages/MyFavoritePage.vue';
+import FortunePage from '@/modules/quiz/pages/FortunePage.vue';
+import PersonaCardAllList from '@/modules/card/persona/pages/PersonaCardAllList.vue';
+import PersonaDepositAllList from '@/modules/deposit/persona/pages/PersonaDepositAllListPage.vue';
+import PersonaSavingAllList from '@/modules/saving/persona/pages/PersonaSavingAllListPage.vue';
+import PersonaSurveyPage from '@/modules/persona/pages/PersonaSurveyPage.vue';
+import PersonaSurveyStart from '@/modules/persona/pages/PersonaSurveyStartPage.vue';
 
-import MyDataCardPage from '@/pages/mydata/MyDataCardPage.vue';
-import RecommendSavings from '@/pages/savings/recommendations/RecommendSavings.vue';
+import MyDataCardPage from '@/modules/card/mydata/pages/MyDataCardPage.vue';
+import RecommendSavings from '@/modules/saving/mydata/pages/RecommendSavings.vue';
 
-import CardRecommendationPage from '@/pages/cards/CardRecommendationPage.vue';
+import CardRecommendationPage from '@/modules/card/mydata/pages/CardRecommendationPage.vue';
 
-import CardDetailPage from '@/pages/detail/CardDetailPage.vue';
-import DepositDetailPage from '@/pages/detail/DepositDetailPage.vue';
-import SavingDetailPage from '@/pages/detail/SavingDetailPage.vue';
+import CardDetailPage from '@/modules/card/detail/pages/CardDetailPage.vue';
+import DepositDetailPage from '@/modules/deposit/detail/pages/DepositDetailPage.vue';
+import SavingDetailPage from '@/modules/saving/detail/pages/SavingDetailPage.vue';
 
-import EducationBoardPage from '@/components/education/EducationBoardPage.vue';
-import WebtoonPage from '@/components/education/WebtoonPage.vue';
-import VideoPage from '@/components/education/EducationVideoBoardPage.vue';
-import QuizEntry from '@/pages/quiz/QuizEntry.vue';
-import ComparePage from '@/pages/compare/ComparePage.vue';
+import EducationBoardPage from '@/modules/education/pages/EducationBoardPage.vue';
+import WebtoonPage from '@/modules/education/pages/WebtoonPage.vue';
+import VideoPage from '@/modules/education/pages/EducationVideoBoardPage.vue';
+import QuizEntry from '@/modules/quiz/pages/QuizEntry.vue';
+import ComparePage from '@/modules/compare/pages/ComparePage.vue';
 
-import DailyQuiz from '@/pages/quiz/DailyQuiz.vue';
+import DailyQuiz from '@/modules/quiz/pages/DailyQuiz.vue';
 /* 결과 페이지 (동적 import) */
-const ResultPage = () => import('@/pages/persona/PersonaResultPage.vue');
+const ResultPage = () =>
+  import('@/modules/persona/pages/PersonaResultPage.vue');
 
 /* 8종 페르소나 코드 */
 const personaCodes = [
@@ -194,7 +195,8 @@ const routes = [
       {
         path: 'video/full/:videoId',
         name: 'VideoDetail',
-        component: () => import('@/components/education/VideoDetailPage.vue'),
+        component: () =>
+          import('@/modules/education/pages/VideoDetailPage.vue'),
         props: true,
       },
       { path: 'webtoon', name: 'webtoon', component: WebtoonPage },
