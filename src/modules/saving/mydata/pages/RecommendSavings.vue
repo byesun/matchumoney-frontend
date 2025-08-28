@@ -1,11 +1,11 @@
 <script setup>
 import { ref, watch } from 'vue';
 import SavingMyProductSlider from '../components/SavingMyProductSlider.vue';
-import BankbookProductList from '@/components/bankbook/BankbookProductList.vue';
-import RecommendationLayout from '@/components/layouts/RecommendationLayout.vue';
-import savingApi from '@/api/savings';
-import Loading from '@/components/common/Loading.vue';
-import BackButton from '@/components/common/BackButton.vue';
+import BankbookProductList from '@/modules/bankbook/components/BankbookProductList.vue';
+import RecommendationLayout from '@/shared/components/layouts/RecommendationLayout.vue';
+import savingApi from '@/modules/saving/api/savings';
+import Loading from '@/shared/components/common/Loading.vue';
+import BackButton from '@/shared/components/common/BackButton.vue';
 
 const selectedId = ref(null);
 const savings = ref([]);
