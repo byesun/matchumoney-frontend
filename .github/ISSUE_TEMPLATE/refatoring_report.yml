@@ -1,0 +1,48 @@
+name: 리팩토링
+description: 코드 품질 개선을 위한 리팩토링 요청
+title: '[리팩토링] '
+labels: [refactoring]
+body:
+  - type: textarea
+    attributes:
+      label: 🔧 리팩토링 대상
+      description: 어떤 부분을 리팩토링할 예정인가요?
+      placeholder: 예) UserService 클래스의 중복 코드 제거
+
+  - type: checkboxes
+    attributes:
+      label: 🎯 리팩토링 이유
+      description: 왜 리팩토링이 필요한가요?
+      options:
+        - label: 코드 중복 제거
+        - label: 성능 개선
+        - label: 가독성 향상
+        - label: 유지보수성 개선
+        - label: 기술 부채 해결
+
+  - type: textarea
+    attributes:
+      label: 📍 파일 위치
+      description: 리팩토링할 파일들을 적어주세요.
+      placeholder: |
+        src/components/UserProfile.js
+        src/utils/validation.js
+
+  - type: textarea
+    attributes:
+      label: 💡 개선 방안
+      description: 어떻게 개선할 예정인가요?
+      placeholder: 예) 공통 함수로 추출하여 utils 폴더로 분리
+
+  - type: dropdown
+    attributes:
+      label: ⚠️ Breaking Change 여부
+      description: 기존 API나 인터페이스에 변경이 있나요?
+      options:
+        - 아니오
+        - 예
+
+  - type: textarea
+    attributes:
+      label: 📝 참고 사항
+      description: 추가로 고려해야 할 사항이나 관련 링크가 있다면 적어주세요.
