@@ -38,9 +38,9 @@
 
 <script setup>
 import { ref, defineEmits, defineProps } from 'vue';
-import { useAuthStore } from '@/stores/auth';
-import SavingConnectModal from '@/components/savings/SavingConnectModal.vue';
-import depositsApi from '@/api/deposit.js';
+import { useAuthStore } from '@/shared/stores/auth';
+import SavingConnectModal from '@/shared/components/savings/SavingConnectModal.vue';
+import depositsApi from '@/modules/deposit/api/deposit.js';
 
 const props = defineProps({
   userId: {

@@ -199,13 +199,13 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import api from '@/api';
-import favorite from '@/api/favorite';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import { ProductType } from '@/constants/productTypes';
-import LikeToggle from '@/components/common/LikeToggle.vue';
-import CompareButton from '@/components/common/CompareButton.vue';
-import BackButton from '@/components/common/BackButton.vue';
+import api from "@/shared/api";
+import favorite from '@/modules/user/api/favorite';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import { ProductType } from '@/shared/constants/productTypes';
+import LikeToggle from '@/shared/components/common/LikeToggle.vue';
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import BackButton from '@/shared/components/common/BackButton.vue';
 
 const productType = ProductType.SAVING;
 

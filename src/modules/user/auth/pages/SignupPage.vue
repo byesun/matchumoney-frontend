@@ -119,13 +119,13 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import BaseCardGrey from '@/components/base/BaseCardGrey.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
-import BaseInput from '@/components/base/BaseInput.vue';
+import BaseCardGrey from '@/shared/components/base/BaseCardGrey.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
+import BaseInput from '@/shared/components/base/BaseInput.vue';
 import '@/assets/main.css';
-import authApi from '@/api/auth';
+import authApi from '@/modules/user/api/auth';
 import { useRouter } from 'vue-router';
-import { useCustomModal } from '@/composables/useCustomModal';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 const email = ref('');
 const authCode = ref('');
@@ -165,10 +165,16 @@ const handleJoin = async () => {
       passwordCheck: confirmPassword.value,
     });
 
-    await showSuccess('회원가입이 완료되었습니다. 로그인 해주세요.', '가입 완료');
+    await showSuccess(
+      '회원가입이 완료되었습니다. 로그인 해주세요.',
+      '가입 완료'
+    );
     router.push('/login');
   } catch (err) {
-    await showError(err?.response?.data?.message || '회원가입 중 오류가 발생했습니다.', '가입 실패');
+    await showError(
+      err?.response?.data?.message || '회원가입 중 오류가 발생했습니다.',
+      '가입 실패'
+    );
   }
 };
 
@@ -181,10 +187,14 @@ const handleSendCode = async () => {
   sendingCode.value = true;
   try {
     await authApi.sendVerificationEmail(email.value);
-    await showSuccess('인증번호가 전송되었습니다. 이메일을 확인해주세요.', '전송 완료');
+    await showSuccess(
+      '인증번호가 전송되었습니다. 이메일을 확인해주세요.',
+      '전송 완료'
+    );
   } catch (err) {
     await showError(
-      err?.response?.data?.message || '인증번호 전송 중 오류가 발생했습니다.', '전송 실패'
+      err?.response?.data?.message || '인증번호 전송 중 오류가 발생했습니다.',
+      '전송 실패'
     );
   } finally {
     sendingCode.value = false;
@@ -202,7 +212,8 @@ const handleVerifyCode = async () => {
     }
   } catch (err) {
     await showError(
-      err?.response?.data?.message || '인증번호 확인 중 오류가 발생했습니다.', '확인 실패'
+      err?.response?.data?.message || '인증번호 확인 중 오류가 발생했습니다.',
+      '확인 실패'
     );
   }
 };

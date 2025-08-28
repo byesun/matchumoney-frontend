@@ -136,8 +136,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-import BackButton from '@/components/common/BackButton.vue';
-import { useCustomModal } from '@/composables/useCustomModal';
+import BackButton from '@/shared/components/common/BackButton.vue';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 // Ensure Font Awesome CSS is available (fallback injector)
 onMounted(() => {

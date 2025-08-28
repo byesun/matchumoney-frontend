@@ -95,8 +95,8 @@
 
 <script setup>
 import { ref, reactive, watch, computed } from 'vue';
-import { useAuthStore } from '@/stores/auth';
-import BaseButton from '@/components/base/BaseButton.vue';
+import { useAuthStore } from '@/shared/stores/auth';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
 
 const props = defineProps({
   isVisible: {

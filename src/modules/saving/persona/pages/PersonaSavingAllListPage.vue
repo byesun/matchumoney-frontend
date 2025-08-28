@@ -305,11 +305,11 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 const modules = [Pagination];
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
-import BackButton from '@/components/common/BackButton.vue';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import CompareButton from '@/components/common/CompareButton.vue';
-import LikeToggle from '@/components/common/LikeToggle.vue';
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
+import BackButton from '@/shared/components/common/BackButton.vue';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import LikeToggle from '@/shared/components/common/LikeToggle.vue';
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
 // 반응형 상태: 모바일 화면 여부
 const isMobile = ref(window.innerWidth <= 768);
 
@@ -325,7 +325,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
 });
-import api from '@/api';
+import api from "@/shared/api";
 // 매월 최대금액 필터링 사용 여부
 const useMaxLimitFilter = ref(false);
 

@@ -188,13 +188,13 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue';
-import BackButton from '@/components/common/BackButton.vue';
+import BackButton from '@/shared/components/common/BackButton.vue';
 import { useRoute, useRouter } from 'vue-router';
-import api from '@/api';
-import CompareButton from '@/components/common/CompareButton.vue';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import { ProductType } from '@/constants/productTypes';
-import LikeToggle from '@/components/common/LikeToggle.vue'; // 이름 변경 후
+import api from "@/shared/api";
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import { ProductType } from '@/shared/constants/productTypes';
+import LikeToggle from '@/shared/components/common/LikeToggle.vue'; // 이름 변경 후
 
 const productType = ProductType.DEPOSIT;
 const personaNameMap = {

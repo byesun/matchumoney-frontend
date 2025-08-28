@@ -662,19 +662,19 @@
 <script setup>
 import { ref, onMounted, computed, watch, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import DefaultLayout from '@/components/layouts/DefaultLayout.vue';
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
+import { useAuthStore } from '@/shared/stores/auth';
+import DefaultLayout from '@/shared/components/layouts/DefaultLayout.vue';
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
 import CardSlider from '../components/CardSlider.vue';
 import CardSyncModal from '../components/CardSyncModal.vue';
 import TransactionSyncModal from '../components/TransactionSyncModal.vue';
 import SpendingPatternChart from '../charts/SpendingPatternChart.vue';
 import CardRecommendationSection from '../components/CardRecommendationSection.vue';
-import cardsApi from '@/api/cards';
+import cardsApi from '@/modules/card/api/cards';
 import KbCardRecommendation from '../components/KbCardRecommendation.vue';
-import BackButton from '@/components/common/BackButton.vue';
-import { useCustomModal } from '@/composables/useCustomModal';
+import BackButton from '@/shared/components/common/BackButton.vue';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 const router = useRouter();
 const authStore = useAuthStore();

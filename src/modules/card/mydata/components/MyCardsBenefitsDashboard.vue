@@ -42,13 +42,21 @@
               @error="handleImageError"
             />
             <div class="card-details">
-              <h3 class="card-name">{{ cardBenefit.ownedCardBenefits[0]?.cardName }}</h3>
-              <p class="card-issuer">{{ cardBenefit.ownedCardBenefits[0]?.issuer }}</p>
+              <h3 class="card-name">
+                {{ cardBenefit.ownedCardBenefits[0]?.cardName }}
+              </h3>
+              <p class="card-issuer">
+                {{ cardBenefit.ownedCardBenefits[0]?.issuer }}
+              </p>
             </div>
           </div>
           <div class="benefit-amount">
             <span class="benefit-value">
-              {{ formatCurrency(cardBenefit.ownedCardBenefits[0]?.estimatedBenefit) }}원
+              {{
+                formatCurrency(
+                  cardBenefit.ownedCardBenefits[0]?.estimatedBenefit
+                )
+              }}원
             </span>
             <span class="benefit-label">예상 혜택</span>
           </div>
@@ -57,11 +65,15 @@
         <div class="spending-summary">
           <div class="summary-item">
             <span class="label">총 소비금액</span>
-            <span class="value">{{ formatCurrency(cardBenefit.totalSpendAmount) }}원</span>
+            <span class="value"
+              >{{ formatCurrency(cardBenefit.totalSpendAmount) }}원</span
+            >
           </div>
           <div class="summary-item">
             <span class="label">주요 카테고리</span>
-            <span class="value">{{ getTopCategory(cardBenefit.categoryStats) }}</span>
+            <span class="value">{{
+              getTopCategory(cardBenefit.categoryStats)
+            }}</span>
           </div>
         </div>
 
@@ -82,11 +94,15 @@
             <span class="stat-label">보유 카드</span>
           </div>
           <div class="stat">
-            <span class="stat-value">{{ formatCurrency(totalSpendAmount) }}원</span>
+            <span class="stat-value"
+              >{{ formatCurrency(totalSpendAmount) }}원</span
+            >
             <span class="stat-label">총 소비금액</span>
           </div>
           <div class="stat">
-            <span class="stat-value">{{ formatCurrency(totalBenefitAmount) }}원</span>
+            <span class="stat-value"
+              >{{ formatCurrency(totalBenefitAmount) }}원</span
+            >
             <span class="stat-label">총 예상혜택</span>
           </div>
         </div>
@@ -96,9 +112,9 @@
 </template>
 
 <script>
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
-import cardsApi from '@/api/cards.js';
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
+import cardsApi from '@/modules/card/api/cards.js';
 
 export default {
   name: 'MyCardsBenefitsDashboard',
@@ -115,9 +131,12 @@ export default {
   },
   computed: {
     totalSpendAmount() {
-      return this.cardsBenefits.reduce((sum, card) => sum + (card.totalSpendAmount || 0), 0);
+      return this.cardsBenefits.reduce(
+        (sum, card) => sum + (card.totalSpendAmount || 0),
+        0
+      );
     },
-    
+
     totalBenefitAmount() {
       return this.cardsBenefits.reduce((sum, card) => {
         const benefit = card.ownedCardBenefits[0]?.estimatedBenefit || 0;
@@ -133,10 +152,9 @@ export default {
       try {
         this.loading = true;
         this.error = null;
-        
+
         const response = await cardsApi.getMyCardsBenefits();
         this.cardsBenefits = response.data || response || [];
-        
       } catch (error) {
         console.error('카드 혜택 데이터 로딩 실패:', error);
         this.error = error.message || '데이터를 불러오는데 실패했습니다.';
@@ -156,7 +174,9 @@ export default {
 
     getTopCategory(categoryStats) {
       if (!categoryStats || categoryStats.length === 0) return '없음';
-      const sorted = [...categoryStats].sort((a, b) => b.totalAmount - a.totalAmount);
+      const sorted = [...categoryStats].sort(
+        (a, b) => b.totalAmount - a.totalAmount
+      );
       return sorted[0]?.category || '없음';
     },
 
@@ -168,7 +188,7 @@ export default {
       if (cardId) {
         this.$router.push({
           name: 'CardRecommendation',
-          params: { cardId: cardId.toString() }
+          params: { cardId: cardId.toString() },
         });
       }
     },
@@ -216,7 +236,9 @@ export default {
   cursor: not-allowed;
 }
 
-.loading-state, .error-state, .empty-state {
+.loading-state,
+.error-state,
+.empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -422,17 +444,17 @@ export default {
   .my-cards-benefits-dashboard {
     padding: 16px;
   }
-  
+
   .cards-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .dashboard-header {
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
   }
-  
+
   .summary-stats {
     grid-template-columns: 1fr;
   }

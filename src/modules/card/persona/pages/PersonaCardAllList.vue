@@ -200,16 +200,16 @@
 <!-- name: 'CardSearchPage' -->
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import BackButton from '@/components/common/BackButton.vue';
-import api from '@/api';
+import BackButton from '@/shared/components/common/BackButton.vue';
+import api from "@/shared/api";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import CompareButton from '@/components/common/CompareButton.vue';
-import LikeToggle from '@/components/common/LikeToggle.vue';
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import LikeToggle from '@/shared/components/common/LikeToggle.vue';
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
 
 const modules = [Pagination];
 const pageSize = 6; // 서버 요청 크기

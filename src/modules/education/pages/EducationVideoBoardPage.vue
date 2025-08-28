@@ -128,8 +128,8 @@ import {
   computed,
   watch,
 } from 'vue';
-import eduAPI from '@/api/edu';
-import BackButton from '@/components/common/BackButton.vue';
+import eduAPI from '@/modules/user/api/edu';
+import BackButton from '@/shared/components/common/BackButton.vue';
 
 const videos = ref([]);
 const loading = ref(false);

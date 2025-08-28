@@ -7,9 +7,9 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import authApi from '@/api/auth';
-import { useAuthStore } from '@/stores/auth';
-import { useCustomModal } from '@/composables/useCustomModal';
+import authApi from '@/modules/user/api/auth';
+import { useAuthStore } from '@/shared/stores/auth';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 const route = useRoute();
 const router = useRouter();

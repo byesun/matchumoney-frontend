@@ -72,7 +72,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
-import api from '@/api';
+import api from "@/shared/api";
 
 const route = useRoute();
 const persona = ref(null);

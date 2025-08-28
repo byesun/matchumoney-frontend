@@ -294,11 +294,11 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
-import BaseButton from '@/components/base/BaseButton.vue';
-import CompareButton from '@/components/common/CompareButton.vue';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import LikeToggle from '@/components/common/LikeToggle.vue';
-import favoriteAPI from '@/api/favorite';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import LikeToggle from '@/shared/components/common/LikeToggle.vue';
+import favoriteAPI from '@/modules/user/api/favorite';
 
 /* ───────────────── Router & Route ───────────────── */
 const route = useRoute();

@@ -55,7 +55,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
-import { BankType } from '@/constants/BankList';
+import { BankType } from '@/shared/constants/BankList';
 
 /** 구성 */
 const id = 'bank-single-select';

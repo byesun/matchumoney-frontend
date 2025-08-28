@@ -241,12 +241,12 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 const modules = [Pagination];
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
-import BackButton from '@/components/common/BackButton.vue';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import CompareButton from '@/components/common/CompareButton.vue';
-import LikeToggle from '@/components/common/LikeToggle.vue';
-import api from '@/api';
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
+import BackButton from '@/shared/components/common/BackButton.vue';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import LikeToggle from '@/shared/components/common/LikeToggle.vue';
+import api from "@/shared/api";
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
 const showTermDropdown = ref(false);
 const isMobile = ref(false);
 

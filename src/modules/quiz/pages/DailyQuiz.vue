@@ -253,10 +253,10 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import quizAPI from '@/api/quiz';
+import quizAPI from '@/modules/quiz/api/quiz';
 import QuizHistory from '@/modules/quiz/components/QuizHistory.vue';
-import BackButton from '@/components/common/BackButton.vue';
-import { useCustomModal } from '@/composables/useCustomModal';
+import BackButton from '@/shared/components/common/BackButton.vue';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 const router = useRouter();
 const { showAlert, showError } = useCustomModal();

@@ -82,9 +82,9 @@ import {
   reactive,
   nextTick,
 } from 'vue';
-import { useCompareStore } from '@/stores/compareStore';
-import compareApi from '@/api/compare';
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
+import { useCompareStore } from '@/shared/stores/compareStore';
+import compareApi from '@/modules/compare/api/compare';
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
 
 const props = defineProps({ type: String, typeKo: String });
 const emit = defineEmits(['close']);

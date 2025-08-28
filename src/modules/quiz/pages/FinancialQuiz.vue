@@ -160,15 +160,14 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import quizAPI from '@/api/quiz';
-import { useCustomModal } from '@/composables/useCustomModal';
+import quizAPI from '@/modules/quiz/api/quiz';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 // 상태 관리
 const isLoading = ref(true);
@@ -311,7 +310,6 @@ const submitAnswer = async () => {
         stats.value.correct++;
         stats.value.totalXP += earnedXP.value;
         stats.value.streak++;
-
       } else {
         stats.value.wrong++;
         stats.value.streak = 0;
@@ -323,17 +321,22 @@ const submitAnswer = async () => {
   } catch (error) {
     console.error('답변 제출 실패:', error);
     if (error.response?.status === 404) {
-      await showError('퀴즈 제출 API를 찾을 수 없습니다. 백엔드 연결을 확인하세요.', 'API 오류');
+      await showError(
+        '퀴즈 제출 API를 찾을 수 없습니다. 백엔드 연결을 확인하세요.',
+        'API 오류'
+      );
     } else if (error.response?.status === 400) {
       await showError('이미 제출된 문제이거나 잘못된 요청입니다.', '요청 오류');
     } else {
-      await showError('답변 제출에 실패했습니다. 네트워크 연결을 확인하세요.', '제출 실패');
+      await showError(
+        '답변 제출에 실패했습니다. 네트워크 연결을 확인하세요.',
+        '제출 실패'
+      );
     }
   } finally {
     isSubmitting.value = false;
   }
 };
-
 
 const finishQuiz = () => {
   showResult.value = true;
@@ -869,7 +872,6 @@ onMounted(async () => {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
-
 
 /* Responsive Design */
 @media (max-width: 768px) {

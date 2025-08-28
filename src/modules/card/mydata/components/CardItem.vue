@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import BaseButton from '@/components/base/BaseButton.vue'
+import BaseButton from '@/shared/components/base/BaseButton.vue'
 
 defineProps({
   card: {

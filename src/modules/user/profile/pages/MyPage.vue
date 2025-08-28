@@ -308,14 +308,14 @@
 import CardVisualSlider from '@/modules/card/mydata/components/CardVisualSlider.vue';
 import CardSyncModal from '@/modules/card/mydata/components/CardSyncModal.vue';
 import CardRegistrationPrompt from '@/modules/card/mydata/components/CardRegistrationPrompt.vue';
-import BaseCardGrey from '@/components/base/BaseCardGrey.vue';
-import BackButton from '@/components/common/BackButton.vue';
+import BaseCardGrey from '@/shared/components/base/BaseCardGrey.vue';
+import BackButton from '@/shared/components/common/BackButton.vue';
 import { ref, computed, onMounted } from 'vue';
-import userApi from '@/api/user';
-import cardsApi from '@/api/cards';
+import userApi from '@/modules/user/api/user';
+import cardsApi from '@/modules/card/api/cards';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import { useCustomModal } from '@/composables/useCustomModal';
+import { useAuthStore } from '@/shared/stores/auth';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 const authStore = useAuthStore();
 const { showAlert, showSuccess, showError } = useCustomModal();
@@ -638,9 +638,7 @@ onMounted(async () => {
     const rawImagePath = data.persona?.imageUrl;
     const fileName = rawImagePath?.split('/').pop();
     const folder = getCharacterFolderByLevel(level.value);
-    const imageUrl = fileName
-      ? new URL(`../../assets/${folder}/${fileName}`, import.meta.url).href
-      : '';
+    const imageUrl = fileName ? `/src/assets/${folder}/${fileName}` : '';
     personaImageUrl.value = imageUrl;
 
     // Set profile image URL (social login / local)

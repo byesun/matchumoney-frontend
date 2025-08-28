@@ -194,14 +194,14 @@
 <script setup>
 import { ref, watch, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import CompareButton from '@/components/common/CompareButton.vue';
-import cardsApi from '@/api/cards.js';
-import favorite from '@/api/favorite.js';
-import { ProductType } from '@/constants/productTypes';
-import LikeToggle from '@/components/common/LikeToggle.vue';
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import cardsApi from '@/modules/card/api/cards.js';
+import favorite from '@/modules/user/api/favorite.js';
+import { ProductType } from '@/shared/constants/productTypes';
+import LikeToggle from '@/shared/components/common/LikeToggle.vue';
 
 // Props
 const props = defineProps({

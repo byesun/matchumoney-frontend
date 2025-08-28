@@ -148,13 +148,13 @@
 </template>
 
 <script>
-import { useAuthStore } from '@/stores/auth';
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
+import { useAuthStore } from '@/shared/stores/auth';
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
 import RecommendedCardItem from '../components/RecommendedCardItem.vue';
 import SpendingCategoryChart from '../components/SpendingCategoryChart.vue';
-import BackButton from '@/components/common/BackButton.vue';
-import cardsApi from '@/api/cards.js';
+import BackButton from '@/shared/components/common/BackButton.vue';
+import cardsApi from '@/modules/card/api/cards.js';
 
 export default {
   name: 'CardRecommendationPage',

@@ -44,7 +44,7 @@
 
 <script setup>
 import { ref, defineProps, computed, onMounted } from 'vue';
-import codefApi from '@/api/codef';
+import codefApi from '@/modules/deposit/api/codef';
 import BankConnectModal from './BankConnectModal.vue';
 
 const choiceVisible = ref(true);

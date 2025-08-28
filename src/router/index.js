@@ -1,7 +1,7 @@
 // router/index.js 또는 router.js
 import KakaoCallbackPage from '@/modules/user/auth/pages/KakaoCallbackPage.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import { useAuthStore } from '@/stores/auth.js';
+import { useAuthStore } from '@/shared/stores/auth.js';
 
 /* ── 페이지 컴포넌트 ─────────────────────── */
 import LoginPage from '@/modules/user/auth/pages/LoginPage.vue';

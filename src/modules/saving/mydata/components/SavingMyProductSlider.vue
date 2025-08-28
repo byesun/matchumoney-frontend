@@ -35,7 +35,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import SavingMyProductCard from './SavingMyProductCard.vue';
-import savingApi from '@/api/savings';
+import savingApi from '@/modules/saving/api/savings';
 import SavingReloadCard from './SavingReloadCard.vue';
 
 const emit = defineEmits(['update:loading', 'select']);

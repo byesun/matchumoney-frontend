@@ -69,13 +69,13 @@
 </template>
 
 <script setup>
-import BaseCard from '@/components/base/BaseCardGrey.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
+import BaseCard from '@/shared/components/base/BaseCardGrey.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
 import '@/assets/main.css';
 import { ref, watch } from 'vue';
 
-import userApi from '@/api/user';
-import { useCustomModal } from '@/composables/useCustomModal';
+import userApi from '@/modules/user/api/user';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 const currentPw = ref('');
 const newPw = ref('');

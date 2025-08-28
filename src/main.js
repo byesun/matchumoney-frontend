@@ -1,11 +1,11 @@
 // src/main.js
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/shared/stores/auth';
 
 import router from './router';
 import App from './App.vue';
-import { initFCM } from '@/firebase/fcmService';
+import { initFCM } from '@/shared/firebase/fcmService';
 
 // 1) 글로벌 스타일
 import 'bootstrap/dist/css/bootstrap.min.css';

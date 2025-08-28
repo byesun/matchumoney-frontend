@@ -379,7 +379,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { BankType } from '@/constants/BankList';
+import { BankType } from '@/shared/constants/BankList';
 
 /** Props & Emits */
 const props = defineProps({

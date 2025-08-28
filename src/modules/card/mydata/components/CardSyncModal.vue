@@ -128,7 +128,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import BaseButton from '@/components/base/BaseButton.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
 
 const props = defineProps({
   isVisible: {

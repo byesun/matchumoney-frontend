@@ -59,10 +59,10 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
-import cardsApi from '@/api/cards.js';
-import favoriteApi from '@/api/favorite.js';
-import BaseButton from '@/components/base/BaseButton.vue';
-import BaseSpinner from '@/components/base/BaseSpinner.vue';
+import cardsApi from '@/modules/card/api/cards.js';
+import favoriteApi from '@/modules/user/api/favorite.js';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
+import BaseSpinner from '@/shared/components/base/BaseSpinner.vue';
 import KbCardListItem from './KbCardListItem.vue';
 
 // 반응형 데이터

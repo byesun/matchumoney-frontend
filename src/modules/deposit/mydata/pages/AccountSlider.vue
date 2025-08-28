@@ -159,8 +159,8 @@
 <script setup>
 import { ref, computed, defineProps, defineEmits, onMounted } from 'vue';
 import BankConnectModal from '@/modules/saving/mydata/components/BankConnectModal.vue';
-import { useAuthStore } from '@/stores/auth';
-import codefApi from '@/api/codef';
+import { useAuthStore } from '@/shared/stores/auth';
+import codefApi from '@/modules/deposit/api/codef';
 
 // Props
 const props = defineProps({

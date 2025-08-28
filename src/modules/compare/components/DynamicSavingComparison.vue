@@ -184,9 +184,9 @@
 
 <script setup>
 import { computed } from 'vue';
-import CompareButton from '@/components/common/CompareButton.vue';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import { ProductType } from '@/constants/productTypes';
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import { ProductType } from '@/shared/constants/productTypes';
 import PlusButton from './PlusButton.vue';
 const productType = ProductType.SAVING;
 

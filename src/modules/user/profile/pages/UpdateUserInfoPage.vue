@@ -93,14 +93,14 @@
 </template>
 
 <script setup>
-import BaseCardGrey from '@/components/base/BaseCardGrey.vue';
-import BaseInput from '@/components/base/BaseInput.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
+import BaseCardGrey from '@/shared/components/base/BaseCardGrey.vue';
+import BaseInput from '@/shared/components/base/BaseInput.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
 import '@/assets/main.css';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import userApi from '@/api/user';
+import userApi from '@/modules/user/api/user';
 import { useRouter } from 'vue-router';
-import { useCustomModal } from '@/composables/useCustomModal';
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 const router = useRouter();
 const { showAlert, showError, showSuccess } = useCustomModal();
 
@@ -143,13 +143,15 @@ const onFileChange = async (e) => {
       profileImageUrl.value = res?.result?.url || res?.url || '';
       if (!profileImageUrl.value) {
         await showError(
-          '이미지 업로드 응답에 URL이 없습니다. 백엔드 응답(JSON)에 url 필드를 추가해주세요.', '업로드 응답 오류'
+          '이미지 업로드 응답에 URL이 없습니다. 백엔드 응답(JSON)에 url 필드를 추가해주세요.',
+          '업로드 응답 오류'
         );
       }
     } else {
       // 2) 더 이상 base64(data URL)로 저장하지 않습니다. (DB 길이 문제 방지)
       await showError(
-        '백엔드에 이미지 업로드 API가 필요합니다. (예: POST /api/files/profile -> { url })\n데이터 URL 저장은 허용하지 않아요.', 'API 누락'
+        '백엔드에 이미지 업로드 API가 필요합니다. (예: POST /api/files/profile -> { url })\n데이터 URL 저장은 허용하지 않아요.',
+        'API 누락'
       );
       profileImageUrl.value = '';
     }

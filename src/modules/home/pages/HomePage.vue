@@ -264,8 +264,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import userApi from '@/api/user';
+import { useAuthStore } from '@/shared/stores/auth';
+import userApi from '@/modules/user/api/user';
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -408,7 +408,7 @@ const mydataFeatures = ref([
 
 // 메서드
 const getImageUrl = (imageName) => {
-  return new URL(`../assets/character_images/${imageName}`, import.meta.url)
+  return new URL(`/src/assets/character_images/${imageName}`, import.meta.url)
     .href;
 };
 

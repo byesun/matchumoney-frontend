@@ -4,7 +4,10 @@
       <div class="hero-content">
         <div class="title-wrapper">
           <h1 class="page-title">
-            <i class="fa-solid fa-graduation-cap title-icon" aria-hidden="true"></i>
+            <i
+              class="fa-solid fa-graduation-cap title-icon"
+              aria-hidden="true"
+            ></i>
             쉽고 재미있는 금융 교육 콘텐츠
           </h1>
         </div>
@@ -48,7 +51,9 @@
           <i class="fa-solid fa-clapperboard"></i>
           교육 영상
         </h3>
-        <p class="webtoon-subtitle">썸네일을 클릭하면 영상을 시청할 수 있어요!</p>
+        <p class="webtoon-subtitle">
+          썸네일을 클릭하면 영상을 시청할 수 있어요!
+        </p>
         <RouterLink to="/education/video">
           <button class="more-btn">
             <i class="fa-solid fa-arrow-right"></i>
@@ -58,23 +63,37 @@
       </div>
 
       <div class="card-grid">
-        <div v-for="(m, i) in visibleVideos" :key="m.id ?? i" class="card" @click="openOverlay(m)">
+        <div
+          v-for="(m, i) in visibleVideos"
+          :key="m.id ?? i"
+          class="card"
+          @click="openOverlay(m)"
+        >
           <!-- 유튜브 썸네일 / 비디오 플레이 아이콘 / 이미지 프리뷰 -->
           <img
             v-if="m.type === 'youtube'"
-            :src="`https://img.youtube.com/vi/${extractYoutubeId(m.link)}/hqdefault.jpg`"
+            :src="`https://img.youtube.com/vi/${extractYoutubeId(
+              m.link
+            )}/hqdefault.jpg`"
             :alt="m.title || '영상 썸네일'"
             class="thumb thumb-16x9"
-            loading="lazy" />
-          <div v-else-if="m.type === 'video'" class="thumb thumb-16x9 video-fallback">
-            <span class="play-badge" aria-hidden><i class="fa-solid fa-play"></i></span>
+            loading="lazy"
+          />
+          <div
+            v-else-if="m.type === 'video'"
+            class="thumb thumb-16x9 video-fallback"
+          >
+            <span class="play-badge" aria-hidden
+              ><i class="fa-solid fa-play"></i
+            ></span>
           </div>
           <img
             v-else-if="m.type === 'image'"
             :src="m.url"
             :alt="m.title || '이미지'"
             class="thumb thumb-16x9"
-            loading="lazy" />
+            loading="lazy"
+          />
           <div v-else class="thumb thumb-16x9 blank">파일 열기</div>
           <div class="card-meta">
             <span class="chip" :class="m.type">
@@ -120,11 +139,23 @@
 
       <!-- 웹툰 목록 -->
       <div v-else class="webtoon-grid">
-        <div v-for="webtoon in webtoons" :key="webtoon.id" class="webtoon-card" @click="openModal(webtoon)">
+        <div
+          v-for="webtoon in webtoons"
+          :key="webtoon.id"
+          class="webtoon-card"
+          @click="openModal(webtoon)"
+        >
           <div class="webtoon-image-container">
-            <img :src="webtoon.fileDownUrl" :alt="webtoon.title" class="webtoon-image" @error="handleImageError" />
+            <img
+              :src="webtoon.fileDownUrl"
+              :alt="webtoon.title"
+              class="webtoon-image"
+              @error="handleImageError"
+            />
             <div class="webtoon-overlay">
-              <span class="play-icon"><i class="fa-solid fa-book-open-reader"></i></span>
+              <span class="play-icon"
+                ><i class="fa-solid fa-book-open-reader"></i
+              ></span>
               <span class="overlay-text">웹툰 읽기</span>
             </div>
           </div>
@@ -136,7 +167,13 @@
     </section>
 
     <!-- Video Overlay (Full screen) -->
-    <div v-if="isOverlayOpen" class="video-overlay" @click.self="closeOverlay" role="dialog" aria-modal="true">
+    <div
+      v-if="isOverlayOpen"
+      class="video-overlay"
+      @click.self="closeOverlay"
+      role="dialog"
+      aria-modal="true"
+    >
       <div class="player-wrap">
         <iframe
           v-if="current?.type === 'youtube'"
@@ -146,7 +183,8 @@
           allowfullscreen
           frameborder="0"
           referrerpolicy="strict-origin-when-cross-origin"
-          :title="current.title || '교육 영상 플레이어'" />
+          :title="current.title || '교육 영상 플레이어'"
+        />
         <video
           v-else-if="current?.type === 'video'"
           class="player-iframe"
@@ -154,15 +192,26 @@
           controls
           autoplay
           playsinline
-          :title="current.title || '교육 영상 플레이어'"></video>
+          :title="current.title || '교육 영상 플레이어'"
+        ></video>
         <img
           v-else-if="current?.type === 'image'"
           :src="current.url"
           :alt="current.title || '이미지'"
-          class="player-image" />
-        <a v-else :href="current?.url" target="_blank" rel="noopener" class="player-link">파일 열기</a>
+          class="player-image"
+        />
+        <a
+          v-else
+          :href="current?.url"
+          target="_blank"
+          rel="noopener"
+          class="player-link"
+          >파일 열기</a
+        >
       </div>
-      <button class="close-button" @click="closeOverlay" aria-label="닫기">✕</button>
+      <button class="close-button" @click="closeOverlay" aria-label="닫기">
+        ✕
+      </button>
     </div>
 
     <!-- 웹툰 모달 -->
@@ -180,7 +229,8 @@
             :src="selectedWebtoon.secondImageUrl"
             :alt="selectedWebtoon.title"
             class="webtoon-full-image"
-            @error="handleModalImageError" />
+            @error="handleModalImageError"
+          />
         </div>
 
         <!-- 모달 푸터 -->
@@ -195,8 +245,8 @@
 <script setup>
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue';
 import { useRouter, RouterLink } from 'vue-router';
-import webtoonApi from '@/api/webtoon';
-import eduAPI from '@/api/edu';
+import webtoonApi from '@/modules/education/api/webtoon';
+import eduAPI from '@/modules/user/api/edu';
 
 // 웹툰 관련 데이터
 const webtoons = ref([]);
@@ -252,8 +302,12 @@ const bp = useBreakpoint(); // 'mobile' | 'tablet' | 'desktop'
 const PREVIEW_VIDEO = { mobile: 2, tablet: 4, desktop: 4 };
 const PREVIEW_TOON = { mobile: 4, tablet: 6, desktop: 8 };
 
-const visibleVideos = computed(() => videos.value.slice(0, PREVIEW_VIDEO[bp.value]));
-const visibleToons = computed(() => toons.value.slice(0, PREVIEW_TOON[bp.value]));
+const visibleVideos = computed(() =>
+  videos.value.slice(0, PREVIEW_VIDEO[bp.value])
+);
+const visibleToons = computed(() =>
+  toons.value.slice(0, PREVIEW_TOON[bp.value])
+);
 
 /* -------------------- 초기 로드 -------------------- */
 onMounted(async () => {
@@ -401,11 +455,13 @@ function closeModal() {
 }
 
 function handleImageError(event) {
-  event.target.src = 'https://via.placeholder.com/300x400/cccccc/666666?text=이미지+없음';
+  event.target.src =
+    'https://via.placeholder.com/300x400/cccccc/666666?text=이미지+없음';
 }
 
 function handleModalImageError(event) {
-  event.target.src = 'https://via.placeholder.com/600x800/cccccc/666666?text=웹툰+이미지+없음';
+  event.target.src =
+    'https://via.placeholder.com/600x800/cccccc/666666?text=웹툰+이미지+없음';
 }
 
 // ESC 키로 모달 닫기
@@ -475,7 +531,9 @@ function extractYoutubeId(url) {
     if (m2) return m2[1];
     return '';
   } catch {
-    const m = String(url).match(/(?:v=|be\/|shorts\/|embed\/)([a-zA-Z0-9_-]{6,})/);
+    const m = String(url).match(
+      /(?:v=|be\/|shorts\/|embed\/)([a-zA-Z0-9_-]{6,})/
+    );
     return m ? m[1] : '';
   }
 }

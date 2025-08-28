@@ -146,7 +146,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import quizAPI from '@/api/quiz';
+import quizAPI from '@/modules/quiz/api/quiz';
 
 const isLoading = ref(true);
 const isRefreshing = ref(false);

@@ -1,12 +1,18 @@
 <template>
-  <div class="chatbot-container" ref="containerRef" :style="containerStyle" :class="{ dragging: isDragging }">
+  <div
+    class="chatbot-container"
+    ref="containerRef"
+    :style="containerStyle"
+    :class="{ dragging: isDragging }"
+  >
     <button
       class="chat-toggle"
       @click="onToggleClick"
       @touchstart="onTouchStart"
       @touchmove.prevent="onTouchMove"
       @touchend="onTouchEnd"
-      :class="{ blurred: isOpen }">
+      :class="{ blurred: isOpen }"
+    >
       <img src="@/assets/chatbot_images/chatbot_cat.png" alt="챗봇 버튼" />
     </button>
     <transition name="chat-fade">
@@ -14,20 +20,32 @@
         <div class="chat-header">
           <span class="chat-title" @click="toggleChat">맞추머니 챗봇</span>
           <div class="chat-actions">
-            <button class="chat-btn" @click="clearMessages" title="대화 초기화">대화 지우기</button>
+            <button class="chat-btn" @click="clearMessages" title="대화 초기화">
+              대화 지우기
+            </button>
             <button class="chat-btn" @click="toggleChat" title="닫기">✖</button>
           </div>
         </div>
 
         <div class="chat-body" ref="chatBody">
-          <div v-for="(msg, index) in messages" :key="index" :class="['message-wrapper', msg.role]">
+          <div
+            v-for="(msg, index) in messages"
+            :key="index"
+            :class="['message-wrapper', msg.role]"
+          >
             <img
               v-if="msg.role === 'bot'"
               class="avatar"
               src="@/assets/chatbot_images/chatbot_cat.png"
-              alt="챗봇 프로필" />
+              alt="챗봇 프로필"
+            />
             <div v-if="msg.role === 'loading'" class="spinner"></div>
-            <div v-else v-html="formattedContent(msg.content)" class="message" :class="msg.role"></div>
+            <div
+              v-else
+              v-html="formattedContent(msg.content)"
+              class="message"
+              :class="msg.role"
+            ></div>
           </div>
 
           <!-- 빠른 버튼 -->
@@ -38,21 +56,31 @@
                 :key="btn"
                 class="quick-btn"
                 :class="submenuMap[btn] ? 'main-menu' : 'sub-menu'"
-                @click="handleQuickButtonClick(i)">
+                @click="handleQuickButtonClick(i)"
+              >
                 {{ btn }}
               </button>
             </transition-group>
           </div>
           <!-- quick-buttons 바로 아래 쪽에 추가 -->
           <div class="cta-buttons" v-if="ctas.length">
-            <button v-for="(c, i) in ctas" :key="i" class="cta-button" @click="goRoute(c.route)">
+            <button
+              v-for="(c, i) in ctas"
+              :key="i"
+              class="cta-button"
+              @click="goRoute(c.route)"
+            >
               {{ c.label }}
             </button>
           </div>
         </div>
 
         <div class="chat-input">
-          <input v-model="input" @keyup.enter="sendMessage" placeholder="궁금한 내용을 입력해주세요." />
+          <input
+            v-model="input"
+            @keyup.enter="sendMessage"
+            placeholder="궁금한 내용을 입력해주세요."
+          />
           <button @click="sendMessage">
             <img src="@/assets/chatbot_images/send-button.png" alt="전송" />
           </button>
@@ -65,7 +93,7 @@
 import { ref, nextTick, onMounted, onBeforeUnmount, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
-import chatbotApi from '@/api/chatbot';
+import chatbotApi from '@/modules/chatbot/api/chatbot';
 
 const router = useRouter();
 // 상태 섹션
@@ -100,7 +128,8 @@ const isMobile = ref(false);
 
 const containerStyle = computed(() => {
   // 데스크톱/태블릿 또는 커스텀 위치가 없으면 기존 스타일 유지 (빈 객체 반환)
-  if (!isMobile.value || !hasCustomPos.value || customPos.value.left === null) return {};
+  if (!isMobile.value || !hasCustomPos.value || customPos.value.left === null)
+    return {};
   // 모바일에서만 left/top 지정하여 고정
   return {
     position: 'fixed',
@@ -218,7 +247,9 @@ const explainTerm = async (term) => {
   await sendBotMessage(answer);
 
   // 후속 질문 + 버튼(계속 반복 가능)
-  await sendBotMessage('혹시 이해가 덜 되셨나요? 원하시면 더 쉽게 다시 설명해드릴게요.');
+  await sendBotMessage(
+    '혹시 이해가 덜 되셨나요? 원하시면 더 쉽게 다시 설명해드릴게요.'
+  );
   scheduleButtons(['더 쉽게 설명해줘', '괜찮아요'], {
     clear: true,
     base: 600,
@@ -257,7 +288,10 @@ const clearButtonTimers = () => {
   buttonTimers.value = [];
 };
 // ⬇️ 버튼들을 순차(스태거)로 보여주는 공통 함수
-const scheduleButtons = (items, { clear = true, base = 800, step = 220 } = {}) => {
+const scheduleButtons = (
+  items,
+  { clear = true, base = 800, step = 220 } = {}
+) => {
   if (clear) visibleButtons.value = [];
   items.forEach((item, i) => {
     const id = setTimeout(() => {
@@ -279,7 +313,9 @@ const clearMessages = async () => {
   messages.value = [];
 
   // 처음 상태로 인사 + 상위 버튼 노출
-  showBotMessageImmediate(`안녕하세요. <strong>맞추머니 챗봇</strong>입니다! 무엇을 도와드릴까요?`);
+  showBotMessageImmediate(
+    `안녕하세요. <strong>맞추머니 챗봇</strong>입니다! 무엇을 도와드릴까요?`
+  );
   scheduleButtons(allButtons, { clear: true, base: 800, step: 220 });
   scrollToBottom();
 };
@@ -298,7 +334,13 @@ const allButtons = [
 ];
 
 const submenuMap = {
-  '서비스 이용방법': ['페르소나 기반 추천', '마이데이터 기반 추천', '상품 비교 기능', '금융 퀴즈', '금융 교육 게시판'],
+  '서비스 이용방법': [
+    '페르소나 기반 추천',
+    '마이데이터 기반 추천',
+    '상품 비교 기능',
+    '금융 퀴즈',
+    '금융 교육 게시판',
+  ],
   '금융 용어 물어보기': [
     '금리',
     '원리금',
@@ -337,8 +379,20 @@ const submenuMap = {
     '통신비',
     '공과금',
   ],
-  '예금 추천받기': ['단기 여유자금', '결혼자금(예금)', '노후자금', '상여금 굴리기', '안전한 목돈관리'],
-  '적금 추천받기': ['여행자금', '자취비용', '비상금', '결혼자금(적금)', '신혼집 자금'],
+  '예금 추천받기': [
+    '단기 여유자금',
+    '결혼자금(예금)',
+    '노후자금',
+    '상여금 굴리기',
+    '안전한 목돈관리',
+  ],
+  '적금 추천받기': [
+    '여행자금',
+    '자취비용',
+    '비상금',
+    '결혼자금(적금)',
+    '신혼집 자금',
+  ],
 };
 
 const serviceLinks = {
@@ -370,36 +424,48 @@ const quickButtonPrompts = {
   '카드 추천받기':
     '주로 어떤 분야에 소비가 많은가요? 아래에서 선택하거나 직접 입력해주세요.\n\n예: 카페, 음식점, 교통, 쇼핑, 온라인구매, 편의점, 영화, 주유, 해외결제, 통신비, 공과금 등',
   카페: '☕ 카페 소비가 많으시군요! 커피 프랜차이즈 위주 할인 카드들을 추천해드릴게요.\n- 스타벅스, 이디야 등 할인\n- 월 실적 30만원 이상\n- 연회비 1만원 이하\n\n→ [추천 카드 보기]',
-  음식점: '🍽️ 외식이 잦으시군요! 주요 음식점 브랜드에서 혜택이 있는 카드 추천드립니다.\n\n→ [추천 카드 보기]',
+  음식점:
+    '🍽️ 외식이 잦으시군요! 주요 음식점 브랜드에서 혜택이 있는 카드 추천드립니다.\n\n→ [추천 카드 보기]',
   교통: '🚌 교통비 중심 소비군요! 대중교통/택시 할인 카드 알려드릴게요.\n\n→ [추천 카드 보기]',
   쇼핑: '🛍️ 쇼핑 중심 소비자라면 온라인몰 또는 백화점 제휴 카드가 적합해요.\n\n→ [추천 카드 보기]',
-  온라인구매: '💻 쿠팡, G마켓 등 온라인 결제 혜택이 많은 카드 추천드립니다.\n\n→ [추천 카드 보기]',
-  편의점: '🏪 CU, GS25 등에서 할인 가능한 카드 추천드립니다.\n\n→ [추천 카드 보기]',
+  온라인구매:
+    '💻 쿠팡, G마켓 등 온라인 결제 혜택이 많은 카드 추천드립니다.\n\n→ [추천 카드 보기]',
+  편의점:
+    '🏪 CU, GS25 등에서 할인 가능한 카드 추천드립니다.\n\n→ [추천 카드 보기]',
   영화: '🎬 영화관 할인 위주 카드 추천드립니다.\n\n→ [추천 카드 보기]',
   주유: '⛽ 주유소 리터당 할인 카드, GS칼텍스 제휴 등을 포함한 추천을 드릴게요.\n\n→ [추천 카드 보기]',
-  해외결제: '🌍 해외 직구나 여행 시 환율 우대와 캐시백이 있는 카드 추천드립니다.\n\n→ [추천 카드 보기]',
-  통신비: '📱 통신요금 자동이체 시 할인되는 카드 추천드립니다.\n\n→ [추천 카드 보기]',
-  공과금: '💡 도시가스, 전기, 수도 요금 자동이체 할인 카드 추천드립니다.\n\n→ [추천 카드 보기]',
-  '예적금 추천받기': '예금과 적금 중 어떤 상품을 추천받고 싶으신가요?\n\n- 예금 추천받기\n- 적금 추천받기',
+  해외결제:
+    '🌍 해외 직구나 여행 시 환율 우대와 캐시백이 있는 카드 추천드립니다.\n\n→ [추천 카드 보기]',
+  통신비:
+    '📱 통신요금 자동이체 시 할인되는 카드 추천드립니다.\n\n→ [추천 카드 보기]',
+  공과금:
+    '💡 도시가스, 전기, 수도 요금 자동이체 할인 카드 추천드립니다.\n\n→ [추천 카드 보기]',
+  '예적금 추천받기':
+    '예금과 적금 중 어떤 상품을 추천받고 싶으신가요?\n\n- 예금 추천받기\n- 적금 추천받기',
   '예금 추천받기':
     '예금 상품은 일정 금액을 한 번에 예치하고 만기까지 보관하는 상품입니다. 예금 목적을 알려주세요.\n\n예: 단기 여유자금, 결혼자금, 노후자금, 상여금 굴리기, 안전한 목돈관리 등',
   '단기 여유자금':
     '💸 단기 운용 목적의 고금리 예금 상품을 추천해드립니다.\n- 3~6개월 상품\n- 중도해지 가능\n- 우대조건 간단\n\n→ [추천 상품 보기]',
   '결혼자금(예금)':
     '💍 장기 자금 마련용 예금 추천드립니다.\n- 12~24개월 고정금리\n- 급여이체 우대\n\n→ [추천 상품 보기]',
-  노후자금: '👵 노후대비 자산관리용 예금 추천드립니다.\n- 안전성 중시\n- 고령자 전용 상품도 포함\n\n→ [추천 상품 보기]',
-  '상여금 굴리기': '💼 상여금이나 보너스를 3~6개월 안전하게 굴릴 수 있는 상품을 추천합니다.\n\n→ [추천 상품 보기]',
-  '안전한 목돈관리': '🔒 원금보장과 예금자 보호 대상 고금리 정기예금 위주로 추천드립니다.\n\n→ [추천 상품 보기]',
+  노후자금:
+    '👵 노후대비 자산관리용 예금 추천드립니다.\n- 안전성 중시\n- 고령자 전용 상품도 포함\n\n→ [추천 상품 보기]',
+  '상여금 굴리기':
+    '💼 상여금이나 보너스를 3~6개월 안전하게 굴릴 수 있는 상품을 추천합니다.\n\n→ [추천 상품 보기]',
+  '안전한 목돈관리':
+    '🔒 원금보장과 예금자 보호 대상 고금리 정기예금 위주로 추천드립니다.\n\n→ [추천 상품 보기]',
   '적금 추천받기':
     '적금은 매달 일정 금액을 적립하며 목돈을 만드는 상품입니다. 적금 목표를 알려주세요.\n\n예: 여행자금, 자취비용, 비상금, 결혼자금, 신혼집 자금 등',
   여행자금:
     '✈️ 여행 경비 마련을 위한 적금 상품 추천드립니다.\n- 6~12개월 단기 적립식\n- 우대조건: 앱 로그인, 자동이체\n\n→ [추천 상품 보기]',
-  자취비용: '🏠 월세 및 생활비 준비용 적금 상품 추천드립니다.\n\n→ [추천 상품 보기]',
+  자취비용:
+    '🏠 월세 및 생활비 준비용 적금 상품 추천드립니다.\n\n→ [추천 상품 보기]',
   비상금:
     '🚨 급할 때를 대비한 짧은 적금 상품 추천드립니다.\n- 자유적립식\n- 중도해지 수수료 적음\n\n→ [추천 상품 보기]',
   '결혼자금(적금)':
     '💍 장기 계획으로 결혼 자금을 모으는 적금 추천드립니다.\n- 24개월 이상 고정 금리\n\n→ [추천 상품 보기]',
-  '신혼집 자금': '🏡 전세자금/청약과 병행 가능한 적금 상품을 안내드립니다.\n\n→ [추천 상품 보기]',
+  '신혼집 자금':
+    '🏡 전세자금/청약과 병행 가능한 적금 상품을 안내드립니다.\n\n→ [추천 상품 보기]',
 };
 
 /* 페르소나: 라벨 → 코드/설명 */
@@ -436,7 +502,8 @@ const personaDescriptions = {
 const scrollToBottom = () => {
   nextTick(() => {
     setTimeout(() => {
-      if (chatBody.value) chatBody.value.scrollTop = chatBody.value.scrollHeight;
+      if (chatBody.value)
+        chatBody.value.scrollTop = chatBody.value.scrollHeight;
     }, 50);
   });
 };
@@ -453,7 +520,9 @@ const fetchDefinitionFromGPT = async (term) => {
 const fetchSimplerDefinitionFromGPT = async (term) => {
   try {
     const reply = await chatbotApi.defineSimple(term);
-    return reply && reply.length ? reply : '더 쉽게 설명을 가져올 수 없었습니다.';
+    return reply && reply.length
+      ? reply
+      : '더 쉽게 설명을 가져올 수 없었습니다.';
   } catch (e) {
     console.error(e);
     return '더 쉽게 설명을 가져올 수 없었습니다.';
@@ -658,15 +727,20 @@ const cardCheckMap = {
 };
 
 const showCardRecommendation = async (category) => {
-  const map = selectedCardType.value === '체크카드' ? cardCheckMap : cardCreditMap;
+  const map =
+    selectedCardType.value === '체크카드' ? cardCheckMap : cardCreditMap;
   const rec = map[category];
   if (!rec) {
-    await sendBotMessage('이 카테고리에 대한 매핑 정보가 없어요. 다른 항목을 선택해 주세요!');
+    await sendBotMessage(
+      '이 카테고리에 대한 매핑 정보가 없어요. 다른 항목을 선택해 주세요!'
+    );
     return;
   }
   await sendBotMessage(`${rec.summary}\n\n추천 카드: ${rec.name}`);
   // 상세 보기 CTA (router 이동)
-  ctas.value = [{ label: `${rec.name} 상세 보기`, route: `/detail/card/${rec.id}` }];
+  ctas.value = [
+    { label: `${rec.name} 상세 보기`, route: `/detail/card/${rec.id}` },
+  ];
 };
 /* =========================
  * 예금 추천 매핑 (카테고리 → 상품 1개)
@@ -784,23 +858,31 @@ const savingRecommendations = {
 const showSavingRecommendation = async (category) => {
   const rec = savingRecommendations[category];
   if (!rec) {
-    await sendBotMessage('이 카테고리에 대한 추천 정보를 찾지 못했어요. 다른 항목을 골라주세요!');
+    await sendBotMessage(
+      '이 카테고리에 대한 추천 정보를 찾지 못했어요. 다른 항목을 골라주세요!'
+    );
     return;
   }
   await sendBotMessage(rec.summary);
   // 상세 보기 CTA (router 이동)
-  ctas.value = [{ label: `${rec.name} 상세 보기`, route: `/detail/saving/${rec.id}` }];
+  ctas.value = [
+    { label: `${rec.name} 상세 보기`, route: `/detail/saving/${rec.id}` },
+  ];
 };
 
 const showDepositRecommendation = async (category) => {
   const rec = depositRecommendations[category];
   if (!rec) {
-    await sendBotMessage('이 카테고리에 대한 추천 정보를 찾지 못했어요. 다른 항목을 선택해 주세요!');
+    await sendBotMessage(
+      '이 카테고리에 대한 추천 정보를 찾지 못했어요. 다른 항목을 선택해 주세요!'
+    );
     return;
   }
   await sendBotMessage(rec.summary);
   // 상세 보기 CTA (router 이동)
-  ctas.value = [{ label: `${rec.name} 상세 보기`, route: `/detail/deposit/${rec.id}` }];
+  ctas.value = [
+    { label: `${rec.name} 상세 보기`, route: `/detail/deposit/${rec.id}` },
+  ];
 };
 
 /* 타자 효과 */
@@ -839,7 +921,9 @@ const toggleChat = () => {
       ctas.value = [];
       visibleButtons.value = [];
       currentParentMenu.value = null;
-      showBotMessageImmediate(`안녕하세요. <strong>맞추머니 챗봇</strong>입니다! 무엇을 도와드릴까요?`);
+      showBotMessageImmediate(
+        `안녕하세요. <strong>맞추머니 챗봇</strong>입니다! 무엇을 도와드릴까요?`
+      );
       scheduleButtons(allButtons, { clear: true, base: 800, step: 220 });
     }
   } else {
@@ -909,7 +993,9 @@ const handleQuickButtonClick = async (index) => {
 
   // 0) 후속 버튼 먼저 처리
   if (selectedText === '괜찮아요') {
-    await sendBotMessage('좋아요! 다른 주제나 용어도 언제든지 물어봐 주세요 🙂');
+    await sendBotMessage(
+      '좋아요! 다른 주제나 용어도 언제든지 물어봐 주세요 🙂'
+    );
     lastExplainedTerm.value = null;
     ctas.value = [];
     isMenuTransitioning.value = false;
@@ -974,7 +1060,9 @@ const handleQuickButtonClick = async (index) => {
   /* 3) 페르소나 유형 설명 — 설명 + 결과 페이지 CTA */
   if (submenuMap['페르소나 유형 설명']?.includes(selectedText)) {
     const code = personaCodeMap[selectedText];
-    const desc = personaDescriptions[selectedText] || '이 유형은 재무 목표와 위험 선호에 따라 맞춤 전략이 달라집니다.';
+    const desc =
+      personaDescriptions[selectedText] ||
+      '이 유형은 재무 목표와 위험 선호에 따라 맞춤 전략이 달라집니다.';
     await sendBotMessage(desc);
 
     if (code) {
@@ -1000,7 +1088,9 @@ const handleQuickButtonClick = async (index) => {
 
     const route = serviceLinks[selectedText];
     const label =
-      selectedText === '페르소나 기반 추천' ? '페르소나 기반 추천 받으러 가기' : `${selectedText} 바로 가기`;
+      selectedText === '페르소나 기반 추천'
+        ? '페르소나 기반 추천 받으러 가기'
+        : `${selectedText} 바로 가기`;
     ctas.value = [{ label, route }];
 
     isMenuTransitioning.value = false;
@@ -1009,7 +1099,9 @@ const handleQuickButtonClick = async (index) => {
   // 카드 타입을 선택한 경우
   if (CARD_TYPE_OPTIONS.includes(selectedText)) {
     selectedCardType.value = selectedText; // '신용카드' or '체크카드'
-    await sendBotMessage(`${selectedText}로 진행할게요. 평소 어떤 소비가 가장 많으세요? 아래에서 선택해 주세요.`);
+    await sendBotMessage(
+      `${selectedText}로 진행할게요. 평소 어떤 소비가 가장 많으세요? 아래에서 선택해 주세요.`
+    );
     // 카드 카테고리 버튼 등장
     scheduleButtons(submenuMap['카드 추천받기'], {
       clear: true,
@@ -1020,19 +1112,28 @@ const handleQuickButtonClick = async (index) => {
     return;
   }
   // 카드 추천받기 하위 카테고리 클릭 처리
-  if (currentParentMenu.value === '카드 추천받기' && submenuMap['카드 추천받기']?.includes(selectedText)) {
+  if (
+    currentParentMenu.value === '카드 추천받기' &&
+    submenuMap['카드 추천받기']?.includes(selectedText)
+  ) {
     await showCardRecommendation(selectedText);
     isMenuTransitioning.value = false;
     return;
   }
   // 예금 추천받기 하위 카테고리 클릭 처리
-  if (currentParentMenu.value === '예금 추천받기' && submenuMap['예금 추천받기']?.includes(selectedText)) {
+  if (
+    currentParentMenu.value === '예금 추천받기' &&
+    submenuMap['예금 추천받기']?.includes(selectedText)
+  ) {
     await showDepositRecommendation(selectedText);
     isMenuTransitioning.value = false;
     return;
   }
   // 적금 추천받기 하위 카테고리 클릭 처리
-  if (currentParentMenu.value === '적금 추천받기' && submenuMap['적금 추천받기']?.includes(selectedText)) {
+  if (
+    currentParentMenu.value === '적금 추천받기' &&
+    submenuMap['적금 추천받기']?.includes(selectedText)
+  ) {
     await showSavingRecommendation(selectedText);
     isMenuTransitioning.value = false;
     return;
@@ -1040,7 +1141,9 @@ const handleQuickButtonClick = async (index) => {
 
   /* 5) 기타 일반 하위 */
   await sendBotMessage(
-    `<strong>${currentParentMenu.value ?? ''}</strong> 중에서 <strong>${selectedText}</strong>에 대해 안내드릴게요!`
+    `<strong>${
+      currentParentMenu.value ?? ''
+    }</strong> 중에서 <strong>${selectedText}</strong>에 대해 안내드릴게요!`
   );
   await sendBotMessage(quickButtonPrompts[selectedText] || selectedText);
   ctas.value = [];
@@ -1118,7 +1221,9 @@ defineExpose({ goRoute, ctas });
   display: flex;
   flex-direction: column;
   position: absolute;
-  bottom: calc(80px + 40px); /* 토글(80px) + 여백 40px → 버튼 안가리게 더 위로 */
+  bottom: calc(
+    80px + 40px
+  ); /* 토글(80px) + 여백 40px → 버튼 안가리게 더 위로 */
   right: 20px;
   font-family: 'Pretendard', sans-serif;
   animation: slideUp 0.4s ease;

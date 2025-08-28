@@ -71,15 +71,15 @@
 <script setup>
 import { ref, reactive, watch, computed, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import TabSelector from '@/components/common/TabSelector.vue';
+import TabSelector from '@/shared/components/common/TabSelector.vue';
 
 // 자식 비교 컴포넌트들 (각 파일에 name 지정 필요: DepositComparison, SavingComparison, CardComparison)
 import DepositComparison from '@/modules/compare/components/DynamicDepositComparison.vue';
 import SavingComparison from '@/modules/compare/components/DynamicSavingComparison.vue';
 import CardComparison from '@/modules/compare/components/DynamicCardComparison.vue';
 
-import { useCompareStore } from '@/stores/compareStore';
-import compareApi from '@/api/compare';
+import { useCompareStore } from '@/shared/stores/compareStore';
+import compareApi from '@/modules/compare/api/compare';
 
 const route = useRoute();
 const router = useRouter();

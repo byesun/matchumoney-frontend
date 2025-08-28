@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import BaseButton from '@/components/base/BaseButton.vue'
+import BaseButton from '@/shared/components/base/BaseButton.vue'
 
 export default {
   name: 'RecommendedCardItem',

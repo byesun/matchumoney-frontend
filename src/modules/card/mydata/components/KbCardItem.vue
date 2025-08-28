@@ -80,8 +80,8 @@
 </template>
 
 <script setup>
-import BaseCardGrey from '@/components/base/BaseCardGrey.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
+import BaseCardGrey from '@/shared/components/base/BaseCardGrey.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
 
 const props = defineProps({
   card: {

@@ -83,11 +83,11 @@
 <script setup>
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-import FavoriteToggle from '@/components/common/FavoriteToggle.vue';
-import { ProductType } from '@/constants/productTypes';
-import CompareButton from '@/components/common/CompareButton.vue';
-import LikeToggle from '@/components/common/LikeToggle.vue';
-import api from '@/api';
+import FavoriteToggle from '@/shared/components/common/FavoriteToggle.vue';
+import { ProductType } from '@/shared/constants/productTypes';
+import CompareButton from '@/shared/components/common/CompareButton.vue';
+import LikeToggle from '@/shared/components/common/LikeToggle.vue';
+import api from "@/shared/api";
 
 const router = useRouter();
 

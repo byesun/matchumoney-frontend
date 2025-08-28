@@ -12,12 +12,23 @@
 
         <!-- 이메일 -->
         <div class="login-row">
-          <BaseInput v-model="email" label="이메일" id="login-email" placeholder="이메일" />
+          <BaseInput
+            v-model="email"
+            label="이메일"
+            id="login-email"
+            placeholder="이메일"
+          />
         </div>
 
         <!-- 비밀번호 -->
         <div class="login-row">
-          <BaseInput v-model="password" label="비밀번호" id="login-password" type="password" placeholder="비밀번호" />
+          <BaseInput
+            v-model="password"
+            label="비밀번호"
+            id="login-password"
+            type="password"
+            placeholder="비밀번호"
+          />
         </div>
 
         <!-- 비밀번호 찾기 -->
@@ -39,7 +50,10 @@
 
         <!-- 카카오 로그인 버튼 -->
         <button class="kakao-btn" @click="handleKakaoLogin">
-          <img src="@/assets/kakao_login_medium_wide.png" alt="카카오계정으로 로그인" />
+          <img
+            src="@/assets/kakao_login_medium_wide.png"
+            alt="카카오계정으로 로그인"
+          />
         </button>
 
         <!-- 회원가입 링크 -->
@@ -55,11 +69,11 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import BaseCardGrey from '@/components/base/BaseCardGrey.vue';
-import BaseInput from '@/components/base/BaseInput.vue';
-import authApi from '@/api/auth'; // ✅ 새로 추가된 import
-import { useCustomModal } from '@/composables/useCustomModal';
+import { useAuthStore } from '@/shared/stores/auth';
+import BaseCardGrey from '@/shared/components/base/BaseCardGrey.vue';
+import BaseInput from '@/shared/components/base/BaseInput.vue';
+import authApi from '@/modules/user/api/auth'; // ✅ 새로 추가된 import
+import { useCustomModal } from '@/shared/composables/useCustomModal';
 
 const email = ref('');
 const password = ref('');
@@ -96,7 +110,10 @@ const handleLogin = async () => {
       nickname: tokenDto.nickname,
     });
 
-    await showSuccess(`${tokenDto.nickname}님, Matchumoney에 오신 것을 진심으로 환영합니다!`, '로그인 성공');
+    await showSuccess(
+      `${tokenDto.nickname}님, Matchumoney에 오신 것을 진심으로 환영합니다!`,
+      '로그인 성공'
+    );
 
     // 로그인 후 리다이렉트 처리
     const redirectPath = route.query.redirect || '/';
@@ -111,13 +128,19 @@ const handleLogin = async () => {
     console.error('❌ 로그인 실패:', err);
 
     if (err.response?.status === 401) {
-      await showError('이메일 또는 비밀번호가 올바르지 않습니다.', '로그인 실패');
+      await showError(
+        '이메일 또는 비밀번호가 올바르지 않습니다.',
+        '로그인 실패'
+      );
     } else if (err.response?.status === 403) {
       alert('이메일 또는 비밀번호가 올바르지 않습니다.');
     } else if (err.response?.status >= 500) {
       alert('이메일 또는 비밀번호가 올바르지 않습니다.');
     } else {
-      await showError(`로그인에 실패했습니다: ${err.response?.data?.message || err.message}`, '로그인 실패');
+      await showError(
+        `로그인에 실패했습니다: ${err.response?.data?.message || err.message}`,
+        '로그인 실패'
+      );
     }
   }
 };

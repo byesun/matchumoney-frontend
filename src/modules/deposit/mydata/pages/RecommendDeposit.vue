@@ -67,12 +67,12 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import depositApi from '@/api/deposit';
+import { useAuthStore } from '@/shared/stores/auth';
+import depositApi from '@/modules/deposit/api/deposit';
 import AccountSlider from './AccountSlider.vue';
 import ProductList from './ProductList.vue';
-import RecommendationLayout from '@/components/layouts/RecommendationLayout.vue';
-import BackButton from '@/components/common/BackButton.vue';
+import RecommendationLayout from '@/shared/components/layouts/RecommendationLayout.vue';
+import BackButton from '@/shared/components/common/BackButton.vue';
 
 // 로그인 페이지로 리다이렉트
 const redirectToLogin = () => {

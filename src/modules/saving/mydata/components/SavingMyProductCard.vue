@@ -1,6 +1,6 @@
 <script setup>
-import { formatDateString } from '@/util/dateFormatter';
-import { roundToTwoDecimalPlaces } from '@/util/numberFormatter';
+import { formatDateString } from '@/shared/utils/dateFormatter';
+import { roundToTwoDecimalPlaces } from '@/shared/utils/numberFormatter';
 defineProps({
   saving: {
     type: Object,

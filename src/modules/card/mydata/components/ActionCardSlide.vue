@@ -57,8 +57,8 @@
 </template>
 
 <script setup>
-import BaseCardGreen from '@/components/base/BaseCardGreen.vue';
-import BaseButton from '@/components/base/BaseButton.vue';
+import BaseCardGreen from '@/shared/components/base/BaseCardGreen.vue';
+import BaseButton from '@/shared/components/base/BaseButton.vue';
 
 const props = defineProps({
   hasCards: {
